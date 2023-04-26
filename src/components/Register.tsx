@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
+import axios from "../api/axios";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
@@ -10,6 +11,17 @@ const Register = () => {
 
   const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = { userName: userName, name: name, password: pass };
+    axios
+      .post("/user", {
+        ...data,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
