@@ -2,7 +2,5 @@
 
 body {
   font-family: "Comfortaa", cursive;
-  @apply bg-dark-2;
+  @apply bg-dark-2 text-light-light-1 text-center text-2xl pt-20;
 }
-
-
