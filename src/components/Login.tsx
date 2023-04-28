@@ -1,13 +1,29 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
+import axios from "../api/axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userName, setUserName] = useState<string>("");
 
   const [pass, setPass] = useState<string>("");
+  const navigate = useNavigate();
 
   const loginHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    axios.get(`user?userName=${userName}`).then((res: any) => {
+      if (!res.data.length) {
+        console.log("invalid information");
+      } else if (res.data[0].password !== pass) {
+        console.log("invalid information");
+      } else {
+        // log in
+        console.log("Success!");
+        sessionStorage.setItem("username", userName);
+
+        navigate("/");
+      }
+    });
   };
 
   return (
